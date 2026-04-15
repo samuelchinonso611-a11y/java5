@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Modern Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="homePage">
+        <nav class="navbar">
+            <div class="logo">My Site</div>
+            <ul class="nav-links">
+                <li><a href="#homePage">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#" id="navLogin">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">=</div>
+        </nav>
+
+        <div class="login-container" id="loginBox">
+            <form class="login-form" id="loginForm">
+                <span class="close-btn" id="closeLogin">&times;</span>
+                <h2>Welcome Back</h2>
+                <input type="email" id="email" placeholder="Enter your email">
+                <small id="emailError" class="error"></small>
+                <input type="password" id="password" placeholder="Enter your password">
+                <small id="passwordError" class="error"></small>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1><i class="fa-solid fa-star"></i> Welcome to My Site</h1>
+                <h2>I am excited to have you here</h2>
+                <button class="btn" id="openLogin">Get Started</button>
+                <button class="btn" id="colorBtn">Change Color</button> 
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="hero image">
+            </div>
+        </section>
+
+       <section class="features" id="features">
+           <div class="cards">
+                <div class="card">
+                  <i class="fa-solid fa-bolt"></i>
+                  <h3>Fast</h3>
+                  <p>Our site is designed to be fast and efficient, ensuring smooth performance.</p>
+                </div>
+                <div class="card">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <h3>Reliable</h3>
+                  <p>Our site is designed to be reliable and trustworthy with 99.9% uptime.</p>
+                </div>
+                <div class="card">
+                 <i class="fa-solid fa-face-smile"></i>
+                 <h3>User-Friendly</h3>
+                 <p>Designed to be user-friendly and easy to navigate for everyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="about-image">
+               <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="About us">
+            </div>
+            <div class="about-text">
+              <h2>About Us</h2>
+              <p>We build clean and modern websites with amazing user experiences. Our goal is to help you create beautiful digital products that stand out.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 My Site | Built with HTML, CSS, and JavaScript</p>
+    </footer>
+
+    <script>
+        const openBtn = document.getElementById("openLogin");
+        const loginBox = document.getElementById("loginBox");
+        const closeBtn = document.getElementById("closeLogin");
+        const toggel = document.querySelector(".menu-toggle");
+        const navlinks = document.querySelector(".nav-links");
+        const form = document.getElementById("loginForm");
+
+        openBtn.onclick = () => {
+            loginBox.style.display = "flex";
+            loginBox.style.animation = "fadeIn 0.5s ease forwards";
+        }
+        closeBtn.onclick = () => {
+            loginBox.style.display = "none";
+        }
+
+        toggel.onclick = () => {
+            navlinks.classList.toggle("active");
+        }
+        window.onload = function() {
+            const colorBtn = document.getElementById('colorBtn');
+            const heading = document.querySelector('.hero-text h1');
+
+            if(colorBtn && heading) {
+                const colors = ['#00bcd4', '#ff6b6b', '#4ecdc4', '#ffe066', '#ff9ff3'];
+
+                colorBtn.addEventListener('click', function() {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    heading.style.color = randomColor;
+                    this.style.background = randomColor;
+                    
+                    // Button animation
+                    this.style.transform = "scale(1.2)";
+                    this.style.transition = "transform 0.2s ease";
+                    setTimeout(() => {
+                        this.style.transform = "scale(1)";
+                    }, 200);
+
+                    console.log("Color changed to: " + randomColor);
+                });
+            }
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+            let valid = true;
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            
+            if (email.value === "") {
+                emailError.textContent = "Email is required";
+                valid = false;
+            }
+            if (password.value === "") {
+                passwordError.textContent = "Password is required";
+                valid = false;
+            }
+            if(valid) {
+                alert("Login Successful!");
+                loginBox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
